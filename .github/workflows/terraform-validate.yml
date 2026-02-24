@@ -51,6 +51,11 @@ jobs:
     - name: Terraform Format
       run: terraform fmt -check -recursive
 
+    - name: Debug Secrets (Check if empty)
+      run: |
+        if [ -z "${{ secrets.AZURE_CLIENT_ID }}" ]; then echo "CLIENT_ID is EMPTY"; else echo "CLIENT_ID is set"; fi
+        if [ -z "${{ secrets.AZURE_TENANT_ID }}" ]; then echo "TENANT_ID is EMPTY"; else echo "TENANT_ID is set"; fi
+
     - name: Terraform Init
       run: terraform init
 
